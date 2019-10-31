@@ -5,6 +5,8 @@
 #include "StringView.h"
 #include "StringBuilder.h"
 
+#include "Object.h"
+
 using ulong=unsigned long;
 
 namespace X
@@ -20,9 +22,8 @@ namespace LK
 
 class Window
 {
-
+    OBJECT(Window)
 public:
-    Window(const String& title = "Window");
     virtual ~Window();
     
     /// Gives the Window the signal to close down.
@@ -36,6 +37,7 @@ public:
     /// returns 0 on success.
     int show();
 protected:
+    Window(const String& title = "Window");
     String m_title;
     bool m_open;
 

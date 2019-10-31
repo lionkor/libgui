@@ -7,6 +7,7 @@ add_executable(libgui_test
 
     Window.cpp
     Window.h
+    Object.h
     main.cpp
 )
 

@@ -3,7 +3,8 @@
 
 int main(int argc, char** argv)
 {
-    LK::Window window;
+    auto window = LK::Window::construct("My Window");
 
-    return window.show();
+
+    return window->show();
 }

@@ -1,0 +1,8 @@
+bin/**
+*.cflags
+*.config
+*.creator*
+*.cxxflags
+*.files
+*.includes
+*.autosave

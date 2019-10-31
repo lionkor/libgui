@@ -4,6 +4,9 @@ add_executable(libgui_test
     String/String.cpp
     String/StringBuilder.cpp
     String/StringView.cpp
+
+    Window.cpp
+    Window.h
     main.cpp
 )
 

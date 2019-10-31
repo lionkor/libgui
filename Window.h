@@ -17,8 +17,12 @@ namespace X
 }
 using namespace X;
 
+
 namespace LK
 {
+
+class Widget;
+
 
 class Window
 {
@@ -36,10 +40,15 @@ public:
     /// Enters event loop, shows the window, etc.
     /// returns 0 on success.
     int show();
+
+    // TODO: Documentation
+    void set_main_widget(Widget*);
 protected:
     Window(const String& title = "Window");
+
     String m_title;
     bool m_open;
+    Widget* m_main_widget;
 
     // X11
     Display* m_display;

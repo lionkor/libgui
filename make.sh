@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ ! -d "./bin" ] 
+then
+    echo "bin dir not found, creating..."
+    mkdir bin
+else
+    echo "bin dir found"
+fi
+
 clear
 cd bin
 rm libgui_test

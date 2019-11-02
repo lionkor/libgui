@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.15)
+
 project(libgui_test)
 
 add_executable(libgui_test
@@ -6,8 +8,8 @@ add_executable(libgui_test
     String/StringView.cpp
 
     Window.cpp
-    Window.h
-    Object.h
+    Widget.cpp
+    Label.cpp
     main.cpp
 )
 

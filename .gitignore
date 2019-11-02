@@ -6,3 +6,5 @@ bin/**
 *.files
 *.includes
 *.autosave
+gede*
+perf*

@@ -1,7 +1,6 @@
 #include "Widget.h"
 
-LK::Widget::Widget(Widget* parent)
-    : m_parent(parent)
+LK::Widget::Widget(Widget* parent) : m_parent(parent)
 {
     if (m_parent)
     {
@@ -9,7 +8,16 @@ LK::Widget::Widget(Widget* parent)
     }
 }
 
-void LK::Widget::register_child(Widget* child)
+void LK::Widget::register_child(Widget* child) { m_children.push_back(child); }
+
+void LK::Widget::fire_redraw_event(Window* window)
 {
-    m_children.push_back(child);
+    for_each_child([&](Widget* child) { child->fire_redraw_event(window); });
+    on_redraw(window);
+}
+
+void LK::Widget::fire_resize_event(LK::Window* window) 
+{
+    for_each_child([&](Widget* child) { child->fire_resize_event(window); });
+    on_resize(window);
 }

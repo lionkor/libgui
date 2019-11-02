@@ -1,6 +1,6 @@
 #include "Layout.h"
 
-Layout::Layout()
+gui::Layout::Layout()
 {
     
 }

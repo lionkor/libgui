@@ -7,7 +7,6 @@ gui::Window::Window(const String& title) : m_title(title), m_open(false)
     m_display = XOpenDisplay(static_cast<char*>(nullptr /* = Display 0 */));
     m_screen = DefaultScreen(m_display);
 
-    ulong black = BlackPixel(m_display, m_screen);
     ulong white = WhitePixel(m_display, m_screen);
 
 

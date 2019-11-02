@@ -46,11 +46,9 @@ void gui::Window::close()
 void gui::Window::redraw()
 {
     std::cout << "redraw" << std::endl;
-    // XSetForeground( m_display, m_graphics_context, BlackPixel(m_display,0)^GetColor(
-    // m_display, "white")  );
     if (m_main_widget)
     {
-        m_main_widget->fire_redraw_event(this);
+        m_main_widget->fire_redraw_event(RedrawEvent { this });
     }
     else
     {
@@ -127,6 +125,10 @@ void gui::Window::handle_x_button_press_event(gui::Window::EventData& event_data
 {
     std::cout << "ButtonPress: (" << event_data.event.xbutton.x << ","
               << event_data.event.xbutton.y << ")" << std::endl;
+
+    ClickEvent click_event { this, event_data.event.xbutton.x, event_data.event.xbutton.y,
+                             event_data.event.xbutton.button };
+    m_main_widget->fire_click_event(click_event);
 }
 
 void gui::Window::handle_x_configure_notify_event(gui::Window::EventData& event_data)
@@ -137,7 +139,7 @@ void gui::Window::handle_x_configure_notify_event(gui::Window::EventData& event_
         // resize event
         m_size.x = configure_event.x;
         m_size.y = configure_event.y;
-        m_main_widget->fire_resize_event(this);
+        m_main_widget->fire_resize_event(ResizeEvent { this });
     }
 }
 
@@ -154,7 +156,7 @@ void gui::Window::set_foreground_color(const StringView& name)
 
 
 void gui::Window::paint_string(const StringView& string, int x, int y,
-                              const StringView& color)
+                               const StringView& color)
 {
     set_foreground_color(color);
     XDrawString(x_display(), x_window(), x_graphics_context(), x, y, string.c_str(),

@@ -11,7 +11,7 @@ class Layout
 public:
     virtual void layout(class Widget*) = 0;
 protected:
-    Layout();
+    Layout() {}
 };
 
 }

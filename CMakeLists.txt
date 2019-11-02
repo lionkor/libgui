@@ -9,7 +9,10 @@ add_executable(libgui_test
 
     Window.cpp
     Widget.cpp
+    Layout.cpp
+    Button.cpp
     Label.cpp
+    Events.cpp
     main.cpp
 )
 

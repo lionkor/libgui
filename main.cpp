@@ -5,8 +5,8 @@
 
 int main(int, char**)
 {
-    auto window = LK::Window::construct("My Window");
-    auto label = LK::Label::construct();
+    auto window = gui::Window::construct("My Window");
+    auto label = gui::Label::construct();
 
     label->set_text("Hello, World!");
     window->set_main_widget(label);

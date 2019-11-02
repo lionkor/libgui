@@ -2,7 +2,7 @@
 #include "Widget.h"
 #include <cassert>
 
-LK::Window::Window(const String& title) : m_title(title), m_open(false)
+gui::Window::Window(const String& title) : m_title(title), m_open(false)
 {
     m_display = XOpenDisplay(static_cast<char*>(nullptr /* = Display 0 */));
     m_screen = DefaultScreen(m_display);
@@ -31,20 +31,20 @@ LK::Window::Window(const String& title) : m_title(title), m_open(false)
     XMapRaised(m_display, m_window);
 }
 
-LK::Window::~Window()
+gui::Window::~Window()
 {
     XFreeGC(m_display, m_graphics_context);
     XDestroyWindow(m_display, m_window);
     XCloseDisplay(m_display);
 }
 
-void LK::Window::close()
+void gui::Window::close()
 {
     std::cout << "close" << std::endl;
     m_open = false;
 }
 
-void LK::Window::redraw()
+void gui::Window::redraw()
 {
     std::cout << "redraw" << std::endl;
     // XSetForeground( m_display, m_graphics_context, BlackPixel(m_display,0)^GetColor(
@@ -61,7 +61,7 @@ void LK::Window::redraw()
     XFlush(m_display);
 }
 
-int LK::Window::show()
+int gui::Window::show()
 {
     m_open = true;
 
@@ -96,7 +96,7 @@ int LK::Window::show()
     return 0;
 }
 
-XColor LK::Window::get_color(const StringView& name)
+XColor gui::Window::get_color(const StringView& name)
 {
     XColor tmp;
     XParseColor(m_display, DefaultColormap(m_display, m_screen), name.chars(), &tmp);
@@ -104,13 +104,13 @@ XColor LK::Window::get_color(const StringView& name)
     return tmp;
 }
 
-void LK::Window::handle_x_expose_event(EventData& event_data)
+void gui::Window::handle_x_expose_event(EventData& event_data)
 {
     if (event_data.event.xexpose.count == 0)
         redraw();
 }
 
-void LK::Window::handle_x_key_press_event(EventData& event_data)
+void gui::Window::handle_x_key_press_event(EventData& event_data)
 {
     KeySym key;
     char text[255];
@@ -124,13 +124,13 @@ void LK::Window::handle_x_key_press_event(EventData& event_data)
     std::cout << "KeyPress: _" << text[0] << "_" << std::endl;
 }
 
-void LK::Window::handle_x_button_press_event(LK::Window::EventData& event_data)
+void gui::Window::handle_x_button_press_event(gui::Window::EventData& event_data)
 {
     std::cout << "ButtonPress: (" << event_data.event.xbutton.x << ","
               << event_data.event.xbutton.y << ")" << std::endl;
 }
 
-void LK::Window::handle_x_configure_notify_event(LK::Window::EventData& event_data)
+void gui::Window::handle_x_configure_notify_event(gui::Window::EventData& event_data)
 {
     auto configure_event = event_data.event.xconfigure;
     if (m_size.x != configure_event.x || m_size.y != configure_event.y)
@@ -142,7 +142,7 @@ void LK::Window::handle_x_configure_notify_event(LK::Window::EventData& event_da
     }
 }
 
-void LK::Window::set_foreground_color(const StringView& name)
+void gui::Window::set_foreground_color(const StringView& name)
 {
     if (name.is_empty() || name == m_current_foreground_color_name)
         return;
@@ -154,7 +154,7 @@ void LK::Window::set_foreground_color(const StringView& name)
 }
 
 
-void LK::Window::paint_string(const StringView& string, int x, int y,
+void gui::Window::paint_string(const StringView& string, int x, int y,
                               const StringView& color)
 {
     set_foreground_color(color);

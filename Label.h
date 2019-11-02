@@ -5,7 +5,7 @@
 #include "Widget.h"
 #include <glm/glm.hpp>
 
-namespace LK
+namespace gui
 {
 
 class Label : public Widget

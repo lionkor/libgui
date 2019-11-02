@@ -22,7 +22,7 @@ namespace X
 using namespace X;
 
 
-namespace LK
+namespace gui
 {
 
 class Widget;
